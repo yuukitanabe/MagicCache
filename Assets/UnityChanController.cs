@@ -17,6 +17,7 @@ public class UnityChanController : MonoBehaviour {
 
     public Camera UnityChanCamera;
 
+    public Create create;
 
 
 	// Use this for initialization
@@ -27,8 +28,6 @@ public class UnityChanController : MonoBehaviour {
         this.agent = GetComponent<NavMeshAgent>();
 
         this.myAnimator.SetBool("Run", false);
-
- 
 
 	}
 	
@@ -52,15 +51,35 @@ public class UnityChanController : MonoBehaviour {
         {
             this.myAnimator.SetBool("Run", false);
         }
+        if (BattleCamera.enabled == true)
+        {
+            agent = GetComponent<NavMeshAgent>();
 
-	}
-    void OnTriggerEnter(Collider other)
+            agent.speed = 0f;
+
+            myAnimator.SetBool("Run", false);
+        }
+
+    }
+void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+
         if(other.gameObject.tag == "Enemy")
         {
            BattleCamera.enabled = true;
 
+            create.isGenerating = false;
+
+            MonsterDestroy monster = GetComponent<MonsterDestroy>();
+            monster.DestroyAllMonster();
+
+
+            Vector3 MonsterPos = transform.position+(transform.forward * 3);
+
+            create.CreateMonster(MonsterPos);
+                
         }
+
+
     }
 }

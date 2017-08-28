@@ -8,29 +8,66 @@ public class Create : MonoBehaviour {
 
     private float nowTime;
 
-    public float createTime;
+    public float timeOut;
 
+    private float timeElapsed;
+
+    public Camera BattleCamera;
+
+    public bool isGenerating = false;
+
+    public bool isCreating = false;
+
+   
 
 	// Use this for initialization
 	void Start () {
 
-        nowTime = 0f;
+        StartCoroutine("CreateCoroutine");
+
+        timeElapsed = 0.0f;
+
+        isGenerating = true;
+
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (nowTime >= createTime)
-        {
-            GameObject obj;
+        timeElapsed += Time.deltaTime;
+    }
 
-            obj = (GameObject)Instantiate(Monster1Prefab, new Vector3(Random.Range(-10, 10), 0, Random.Range(-220, -240)), Quaternion.identity);
-            Destroy(obj, 10);
-            nowTime = 0f;
+    private IEnumerator CreateCoroutine()
+    {
+        while (true) {
 
+            yield return new WaitForSeconds(2.0f);
+
+            if (timeElapsed >= timeOut && isGenerating == true)
+            {
+                GameObject obj;
+
+                obj = (GameObject)Instantiate(Monster1Prefab, new Vector3(Random.Range(-10, 10), 0, Random.Range(-220, -240)), Quaternion.identity);
+                Destroy(obj, 10);
+
+                timeElapsed = 0.0f;
+            }
+            else { 
+                yield return 0;
+            }
         }
-        nowTime += Time.deltaTime;
-		
-	}
+
+    }
+
+    public MonsterController CreateMonster(Vector3 pos)
+    {
+             
+            GameObject obj = Instantiate(Monster1Prefab, pos, Quaternion.identity);
+
+        return obj.GetComponent<MonsterController>();
+
+
+    }
+
 }

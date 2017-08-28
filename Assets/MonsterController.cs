@@ -22,8 +22,10 @@ public class MonsterController : MonoBehaviour {
 	void Update () {
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), 0.3f);
-
-        transform.position += transform.forward * speed;
+       
+        Vector3 direction = transform.forward;
+        direction.y = 0;
+        transform.position += direction * speed;
 
 		
 	}

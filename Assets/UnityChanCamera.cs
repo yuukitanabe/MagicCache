@@ -23,5 +23,6 @@ public class UnityChanCamera : MonoBehaviour {
 
         GetComponent<Transform>().position = target.position + offset;
 
+
 	}
 }
