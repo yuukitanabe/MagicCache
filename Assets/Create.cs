@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Create : MonoBehaviour {
 
@@ -16,9 +17,12 @@ public class Create : MonoBehaviour {
 
     public bool isGenerating = false;
 
-    public bool isCreating = false;
 
-   
+    GameObject unitychan;
+
+    UnityChanController unitychanController;
+
+    
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +33,11 @@ public class Create : MonoBehaviour {
 
         isGenerating = true;
 
+        unitychan = GameObject.Find("unitychan");
 
+        unitychanController = unitychan.GetComponent<UnityChanController>();
+
+        
 	}
 	
 	// Update is called once per frame
@@ -62,12 +70,18 @@ public class Create : MonoBehaviour {
 
     public MonsterController CreateMonster(Vector3 pos)
     {
-             
+        
+        
             GameObject obj = Instantiate(Monster1Prefab, pos, Quaternion.identity);
+        unitychanController.Enemy = obj;
+        
 
         return obj.GetComponent<MonsterController>();
 
-
+           
     }
+    
+
+
 
 }
