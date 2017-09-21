@@ -44,10 +44,11 @@ public class UnityChanController : MonoBehaviour {
 
     private int unitychanDamage = 20;
 
-   
+    public bool isEncount;
 
-   
-    
+
+    public GameObject DamageEffect;
+
 
     // Use this for initialization
     void Start () {
@@ -66,10 +67,15 @@ public class UnityChanController : MonoBehaviour {
 
         Monster1Prefab = GameObject.Find("Monster1Prefab");
 
-        
+
+        DamageEffect = GameObject.Find("DamageEffect");
+
+
 
 
         createmonster = GetComponent<MonsterController>();
+
+        
 
         timeElapsed = 0.0f;
     }
@@ -77,16 +83,19 @@ public class UnityChanController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButtonDown(0))
+        if (isEncount == false)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (Input.GetMouseButtonDown(0))
             {
-                agent.SetDestination(hit.point);
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                this.myAnimator.SetBool("Run", true);
+                if (Physics.Raycast(ray, out hit, 100f))
+                {
+                    agent.SetDestination(hit.point);
 
+                    this.myAnimator.SetBool("Run", true);
+
+                }
             }
         }
 
@@ -120,19 +129,19 @@ public class UnityChanController : MonoBehaviour {
                         hit.collider.gameObject.tag == "Grass")
                     {
                     Attack(hit.collider.gameObject.GetComponent<BattleObjectController>());
-                    }
+                    
+                }
                     
                 }
             
         }
         
-
     }
     public void Attack(BattleObjectController BattleObj)
     {
        if (BattleObj.Hit())
         {
-            createmonster.GetComponent<ParticleSystem>().Play();
+            DamageEffect.GetComponent<ParticleSystem>().Play();
             Destroy(BattleObj.gameObject);
             if (createmonster.Damage(5))
             {
@@ -141,6 +150,8 @@ public class UnityChanController : MonoBehaviour {
                 create.isGenerating = true;
 
                 createmonster.isEncount = false;
+
+                isEncount = false;
 
                 battleObject.RemoveAll();
 
@@ -166,17 +177,19 @@ void OnTriggerEnter(Collider other)
             monster.DestroyAllMonster();
            
 
-            Vector3 MonsterPos = transform.position + (transform.forward * 11.5f);
+            Vector3 MonsterPos = transform.position + (transform.forward * 10f);
 
             createmonster = create.CreateMonster(MonsterPos);
 
             createmonster.isEncount = true;
 
+            isEncount = true;
+
             createmonster.transform.LookAt(transform);
 
             transform.LookAt(createmonster.transform);
 
-            createmonster.transform.localScale *= 3.2f;
+            createmonster.transform.localScale *= 2.8f;
 
 
             unitychanHPSlider.gameObject.SetActive(true);
@@ -187,12 +200,8 @@ void OnTriggerEnter(Collider other)
       
             Debug.Log(unitychanHPSlider.value = unitychanHP);
 
-            
-
         }
         
     }
-
-    
    
 }

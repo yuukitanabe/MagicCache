@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4751311675252960}
   - component: {fileID: 135139191407756222}
   - component: {fileID: 114865520991691954}
+  - component: {fileID: 54002472888272528}
   m_Layer: 0
   m_Name: CrystalPrefab
   m_TagString: Crystal
@@ -52,8 +53,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1166675162052966}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.081127, y: -0.5, z: -245.64325}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.986401, y: -2.7265625, z: -9.4401245}
   m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_Children:
   - {fileID: 4858709379685556}
@@ -112,6 +113,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365402524715564}
   m_Mesh: {fileID: 4300002, guid: 5dc0aab3aa1f6574fa89d0a18579f53a, type: 3}
+--- !u!54 &54002472888272528
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166675162052966}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &64673091602420788
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -138,6 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BattleCamera: {fileID: 0}
+  hitCount: 0
+  MaxhitCount: 0
 --- !u!135 &135139191407756222
 SphereCollider:
   m_ObjectHideFlags: 1

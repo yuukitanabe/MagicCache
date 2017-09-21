@@ -10,6 +10,8 @@ public class BattleObjectGenerator : MonoBehaviour {
 
     public List<GameObject> generateObjectList;
 
+    public float shakePower = 8f;
+
 	// Use this for initialization
 	void Start () {
         
@@ -22,13 +24,13 @@ public class BattleObjectGenerator : MonoBehaviour {
 
     public void GenerateObject()
     {
-        for ( int i = 0; i < 10; i++)
+        for ( int i = 0; i < objectlist.Count; i++)
         {
-            Vector3 objectPos = new Vector3(Random.Range(-1, 3), Random.Range(0.5f, 6), 3f);
+            Vector3 objectPos = new Vector3(Random.Range(-5, 5), Random.Range(1, 5), 3.2f);
             Vector3 worldPos = unitychan.transform.TransformPoint(objectPos);
             GameObject go = Instantiate(objectlist[i]) as GameObject;
 
-            go.transform.position = worldPos;
+            go.transform.position = worldPos + Random.insideUnitSphere * shakePower;
 
             generateObjectList.Add(go);
 

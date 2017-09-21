@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour {
 
     private bool isGameOver = false;
 
+    private bool isClear = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -19,18 +21,25 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (this.isGameOver)
+		if (this.isGameOver || this.isClear)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 SceneManager.LoadScene("GameScene");
             }
         }
+        
+         
 	}
 
     public void GameOver()
     {
         this.gameOverText.GetComponent<Text>().text = "GameOver";
         this.isGameOver = true;
+    }
+    public void Clear()
+    {
+        this.gameOverText.GetComponent<Text>().text = "CLEAR!";
+        this.isClear = true;
     }
 }
