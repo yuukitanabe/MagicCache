@@ -47,7 +47,7 @@ public class UnityChanController : MonoBehaviour {
     public bool isEncount;
 
 
-    public GameObject DamageEffect;
+    
 
 
     // Use this for initialization
@@ -68,7 +68,7 @@ public class UnityChanController : MonoBehaviour {
         Monster1Prefab = GameObject.Find("Monster1Prefab");
 
 
-        DamageEffect = GameObject.Find("DamageEffect");
+        
 
 
 
@@ -128,11 +128,11 @@ public class UnityChanController : MonoBehaviour {
                         hit.collider.gameObject.tag == "Flower"||
                         hit.collider.gameObject.tag == "Grass")
                     {
+                    createmonster.DamageEffect.GetComponent<ParticleSystem>().Play();
                     Attack(hit.collider.gameObject.GetComponent<BattleObjectController>());
-                    
-                }
-                    
-                }
+                    }
+                
+            }
             
         }
         
@@ -141,8 +141,10 @@ public class UnityChanController : MonoBehaviour {
     {
        if (BattleObj.Hit())
         {
-            DamageEffect.GetComponent<ParticleSystem>().Play();
+            
+
             Destroy(BattleObj.gameObject);
+
             if (createmonster.Damage(5))
             {
                 BattleCamera.enabled = false;
