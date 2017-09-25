@@ -33,7 +33,7 @@ public class MonsterController : MonoBehaviour {
 
     private float unitychanHP = 100;
 
-    public GameObject DamageEffect;
+    
 
     // Use this for initialization
     void Start() {
@@ -51,7 +51,7 @@ public class MonsterController : MonoBehaviour {
         unitychanController = unitychan.GetComponent<UnityChanController>();
 
 
-        DamageEffect = GameObject.Find("DamageEffect");
+        
 
 
     }

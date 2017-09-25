@@ -128,7 +128,7 @@ public class UnityChanController : MonoBehaviour {
                         hit.collider.gameObject.tag == "Flower"||
                         hit.collider.gameObject.tag == "Grass")
                     {
-                    createmonster.DamageEffect.GetComponent<ParticleSystem>().Play();
+                    createmonster.GetComponent<ParticleSystem>().Play();
                     Attack(hit.collider.gameObject.GetComponent<BattleObjectController>());
                     }
                 
